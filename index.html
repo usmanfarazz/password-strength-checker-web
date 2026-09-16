@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Password Strength Checker</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="card">
+    <h1>🔐 Password Strength Checker</h1>
+    <p class="subtitle">Everything runs locally in your browser. No password ever leaves this page.</p>
+
+    <div class="input-row">
+      <input type="password" id="pwInput" placeholder="Type a password to analyze..." autocomplete="off" />
+      <button id="toggleBtn" type="button" aria-label="Show password">👁</button>
+    </div>
+
+    <div class="meter">
+      <div id="meterFill" class="meter-fill"></div>
+    </div>
+    <p id="strengthLabel" class="strength-label">Strength: —</p>
+
+    <div class="stats">
+      <div class="stat">
+        <span class="stat-label">Entropy</span>
+        <span id="entropyValue" class="stat-value">0 bits</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Est. crack time</span>
+        <span id="crackValue" class="stat-value">—</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Character pool</span>
+        <span id="poolValue" class="stat-value">0</span>
+      </div>
+    </div>
+
+    <ul id="issuesList" class="issues"></ul>
+
+    <footer>
+      <a href="https://github.com/usmanfarazz/password-analyzer" target="_blank" rel="noopener">Python + Bash CLI version →</a>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
