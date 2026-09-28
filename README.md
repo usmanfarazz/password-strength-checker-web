@@ -11,7 +11,7 @@ written in Python + Bash.
 
 - 📏 Live entropy estimate (bits) as you type
 - ⏱️ Offline brute-force crack-time estimate (~10B guesses/sec)
-- 🚩 Weak-pattern detection: common passwords, keyboard sequences, repeated characters
+- 🚩 Weak-pattern detection: common passwords (including dressed-up variants like `Password123!` or `p@ssw0rd`), keyboard sequences, repeated characters
 - 🎨 Simple animated strength meter
 - 🔒 Fully offline — everything runs in `script.js`, nothing is transmitted anywhere
 

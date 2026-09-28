@@ -11,6 +11,19 @@ const COMMON_PASSWORDS = new Set([
   "dragon", "master", "login", "princess", "solo", "qazwsx",
 ]);
 
+// Substitutions cracking rules undo first (p@ssw0rd -> password).
+const LEET = { "@": "a", "4": "a", "0": "o", "1": "i", "!": "i", "3": "e", "$": "s", "5": "s", "7": "t" };
+
+// True if pw is a common password, even when dressed up with capitals,
+// digits/symbols on the ends (Password123!, admin@2024) or leetspeak.
+function isCommon(pw) {
+  const lower = pw.toLowerCase();
+  const core = lower.replace(/^[^a-z]+|[^a-z]+$/g, "");
+  const unleet = (s) => [...s].map((c) => LEET[c] || c).join("");
+  const unleetCore = unleet(lower).replace(/^[^a-z]+|[^a-z]+$/g, "");
+  return [lower, core, unleet(lower), unleetCore].some((c) => c && COMMON_PASSWORDS.has(c));
+}
+
 const pwInput = document.getElementById("pwInput");
 const toggleBtn = document.getElementById("toggleBtn");
 const meterFill = document.getElementById("meterFill");
@@ -86,10 +99,13 @@ function analyze(pw) {
   }
 
   const pool = poolSize(pw);
-  const entropy = pw.length * Math.log2(pool || 1);
+  const common = isCommon(pw);
+  // A dictionary + rules attack finds common passwords at once, so brute-force
+  // entropy doesn't apply; cap it to show the real (effective) strength.
+  const entropy = common ? Math.min(10, pw.length * Math.log2(pool || 1)) : pw.length * Math.log2(pool || 1);
   // Offline guess rate, matches the CLI tool's assumption (~10 billion guesses/sec)
   const guessesPerSecond = 1e10;
-  const crackSeconds = Math.pow(2, entropy) / guessesPerSecond;
+  const crackSeconds = common ? 0 : Math.pow(2, entropy) / guessesPerSecond;
 
   const issues = [];
   if (pw.length < 8) issues.push({ ok: false, text: "Too short — use at least 12 characters" });
@@ -97,7 +113,7 @@ function analyze(pw) {
   if (!/[a-z]/.test(pw)) issues.push({ ok: false, text: "Add a lowercase letter" });
   if (!/[0-9]/.test(pw)) issues.push({ ok: false, text: "Add a digit" });
   if (!/[^a-zA-Z0-9]/.test(pw)) issues.push({ ok: false, text: "Add a symbol" });
-  if (COMMON_PASSWORDS.has(pw.toLowerCase())) issues.push({ ok: false, text: "This is a widely known common password" });
+  if (common) issues.push({ ok: false, text: "Based on a common password — dictionary attacks try this first" });
   if (hasSequence(pw)) issues.push({ ok: false, text: "Avoid keyboard/alphabet sequences (e.g. abc, qwe)" });
   if (hasRepeats(pw)) issues.push({ ok: false, text: "Avoid repeating the same character 3+ times" });
 
@@ -110,7 +126,7 @@ function analyze(pw) {
   if (entropy > 40) score = 2;
   if (entropy > 60) score = 3;
   if (entropy > 80) score = 4;
-  if (COMMON_PASSWORDS.has(pw.toLowerCase())) score = 0;
+  if (common) score = 0;
 
   const levels = [
     { pct: 10, color: "var(--weak)", label: "Very Weak" },
