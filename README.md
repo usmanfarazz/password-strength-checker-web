@@ -14,6 +14,7 @@ written in Python + Bash.
 - 🚩 Weak-pattern detection: common passwords (including dressed-up variants like `Password123!` or `p@ssw0rd`), keyboard sequences, repeated characters
 - 🎨 Simple animated strength meter
 - 🔒 Fully offline — everything runs in `script.js`, nothing is transmitted anywhere
+- 🛡️ A strict Content-Security-Policy blocks any outgoing request, so the "no network calls" promise is enforced by the browser, not just by the code
 
 ## Usage
 

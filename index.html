@@ -3,6 +3,11 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Check how strong a password is: entropy, crack time and weak patterns. Runs 100% in your browser, nothing is sent anywhere." />
+<meta name="theme-color" content="#0f172a" />
+<!-- Enforce the "no network calls" promise: the page may only load its own files and cannot send data anywhere. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; form-action 'none'; base-uri 'none'" />
+<meta name="referrer" content="no-referrer" />
 <title>Password Strength Checker</title>
 <link rel="stylesheet" href="style.css" />
 </head>
