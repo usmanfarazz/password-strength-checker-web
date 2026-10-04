@@ -37,6 +37,8 @@ toggleBtn.addEventListener("click", () => {
   const showing = pwInput.type === "text";
   pwInput.type = showing ? "password" : "text";
   toggleBtn.textContent = showing ? "👁" : "🙈";
+  toggleBtn.setAttribute("aria-label", showing ? "Show password" : "Hide password");
+  toggleBtn.setAttribute("aria-pressed", String(!showing));
 });
 
 pwInput.addEventListener("input", () => analyze(pwInput.value));
