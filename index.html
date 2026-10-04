@@ -18,14 +18,15 @@
     <p class="subtitle">Everything runs locally in your browser. No password ever leaves this page.</p>
 
     <div class="input-row">
-      <input type="password" id="pwInput" placeholder="Type a password to analyze..." autocomplete="off" />
+      <label for="pwInput" class="visually-hidden">Password to check</label>
+      <input type="password" id="pwInput" placeholder="Type a password to analyze..." autocomplete="off" spellcheck="false" />
       <button id="toggleBtn" type="button" aria-label="Show password">👁</button>
     </div>
 
     <div class="meter">
       <div id="meterFill" class="meter-fill"></div>
     </div>
-    <p id="strengthLabel" class="strength-label">Strength: —</p>
+    <p id="strengthLabel" class="strength-label" aria-live="polite">Strength: —</p>
 
     <div class="stats">
       <div class="stat">
