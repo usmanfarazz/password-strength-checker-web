@@ -9,6 +9,14 @@ const COMMON_PASSWORDS = new Set([
   "123123", "letmein", "iloveyou", "admin", "welcome", "monkey",
   "password1", "1234567", "12345", "1234567890", "football",
   "dragon", "master", "login", "princess", "solo", "qazwsx",
+  // more of the most-leaked passwords, plus common local picks
+  "sunshine", "shadow", "baseball", "superman", "batman", "trustno1",
+  "starwars", "whatever", "freedom", "hello", "charlie", "michael",
+  "jordan", "hunter", "ashley", "bailey", "passw0rd", "qwertyuiop",
+  "asdfgh", "zxcvbnm", "computer", "internet", "secret", "summer",
+  "winter", "flower", "cricket", "pakistan", "lahore", "karachi",
+  "islamabad", "bismillah", "allah", "muhammad", "admin123", "root",
+  "test", "guest", "default", "changeme",
 ]);
 
 // Substitutions cracking rules undo first (p@ssw0rd -> password).
